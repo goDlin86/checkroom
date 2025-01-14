@@ -1,4 +1,3 @@
-import Image from "next/image"
 import Items from "../components/Items"
 import AddItem from "../components/AddItem"
 

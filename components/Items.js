@@ -22,14 +22,14 @@ export default async function Items() {
       </div>
       <div className="">
         {tags.map(tag => (
-          <>
+          <div key={tag}>
             {items.some(item => item.tag == tag) && 
               <>
                 <h1 id={tag}>{tag}</h1>
                 <div className="grid grid-cols-4 gap-4">
                   {
-                    items.filter(item => item.tag === tag).map(item => (
-                      <div className="relative overflow-hidden rounded-2xl">
+                    items.filter(item => item.tag === tag).map((item, i) => (
+                      <div key={i} className="relative overflow-hidden rounded-2xl">
                         <img className="block object-cover w-full h-72" src={item.url} />
                       </div>
                     ))
@@ -37,7 +37,7 @@ export default async function Items() {
                 </div>
               </>
             }
-          </>
+          </div>
           ))}
       </div>
     </>

@@ -12,6 +12,7 @@ export async function POST(request) {
   })
 
   const result = await sql`INSERT INTO items (name, tag, url, owner) VALUES (${filename}, ${tag}, ${blob.url}, 1);`;
+  console.log(result)
 
   return NextResponse.json(blob)
 }
