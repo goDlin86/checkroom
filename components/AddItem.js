@@ -37,7 +37,7 @@ export default function AddItem() {
           <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase">Choose image</div>
           <div className="text-white/10">or drag and drop image here</div>
           <input className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" type="file" accept="image/*" ref={inputFileRef} required 
-            onChange={_ => {
+            onChange={() => {
               const [file] = inputFileRef.current.files
               if (file) {
                 //setShow(true)
