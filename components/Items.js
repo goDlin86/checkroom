@@ -1,3 +1,5 @@
+'use server'
+
 import { sql } from '@vercel/postgres'
 
 const tags = ['shirts', 't-shirts', 'jackets', 'jeans', 'shorts', 'shoes', 'sweatshirts', 'beanies']
@@ -20,7 +22,7 @@ export default async function Items() {
           <a className="mx-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
       </div>
-      <div className="px-4 md:px-0">
+      <div className="px-4 lg:px-0">
         {tags.map(tag => (
           <div key={tag}>
             {items.some(item => item.tag == tag) && 

@@ -6,13 +6,14 @@ export async function POST(request) {
   const { searchParams } = new URL(request.url)
   const filename = searchParams.get('filename')
   const tag = searchParams.get('tag')
+  const type = searchParams.get('type')
 
-  const blob = await put(filename, request.body, {
-    access: 'public',
-  })
-
-  const result = await sql`INSERT INTO items (name, tag, url, owner) VALUES (${filename}, ${tag}, ${blob.url}, 1);`;
-  console.log(result)
-
-  return NextResponse.json(blob)
+  try {
+    const blob = await put(filename, request.body, { access: 'public', contentType: type })
+    const result = await sql`INSERT INTO items (name, tag, url, owner) VALUES (${filename}, ${tag}, ${blob.url}, 1);`
+    return NextResponse.json({result}, {status: 200})
+  } catch (e) {
+    console.log(e)
+    return NextResponse.json({e}, {status: 500})
+  }
 }
