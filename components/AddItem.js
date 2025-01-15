@@ -52,7 +52,7 @@ export default function AddItem() {
          <img ref={inputImg} className="block object-cover w-full h-72 text-center" />
         </div>
         <input 
-          className="rounded-full w-full outline-none mt-4 px-4 py-1 bg-white/10 border-2 border-white/10 text-center" 
+          className="rounded-full w-full outline-none mt-4 px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)]" 
           name="name" 
           type="text" 
           ref={inputName} 

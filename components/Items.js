@@ -20,13 +20,13 @@ export default async function Items() {
           <a className="mx-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
       </div>
-      <div className="">
+      <div className="px-4 md:px-0">
         {tags.map(tag => (
           <div key={tag}>
             {items.some(item => item.tag == tag) && 
               <>
-                <h1 id={tag}>{tag}</h1>
-                <div className="grid grid-cols-4 gap-4">
+                <h1 id={tag} className="text-xl uppercase">{tag}</h1>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {
                     items.filter(item => item.tag === tag).map((item, i) => (
                       <div key={i} className="relative overflow-hidden rounded-2xl">
