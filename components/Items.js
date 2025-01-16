@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres'
-
-const tags = ['shirts', 't-shirts', 'jackets', 'jeans', 'shorts', 'shoes', 'sweatshirts', 'beanies']
+import Link from 'next/link'
+import { tags } from './tags'
 
 export default async function Items() {
   let data
@@ -15,9 +15,9 @@ export default async function Items() {
 
   return (
     <>
-      <div className="py-6 overflow-x-scroll whitespace-nowrap scrollbar">
+      <div className="py-2 overflow-x-scroll whitespace-nowrap scrollbar">
         {tags.map(tag => (
-          <a className="mx-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer" href={`#${tag}`} key={tag}>{tag}</a>
+          <a className="mx-2 px-3 py-1 border-2 rounded-full inline-block cursor-pointer" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
       </div>
       <div className="px-4 lg:px-0">
@@ -29,9 +29,11 @@ export default async function Items() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {
                     items.filter(item => item.tag === tag).map((item, i) => (
-                      <div key={i} className="relative overflow-hidden rounded-2xl">
-                        <img className="block object-cover w-full h-72" src={item.url} />
-                      </div>
+                      <Link href={`/item/${item.id}`} key={i}>
+                        <div className="relative overflow-hidden rounded-2xl">
+                          <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
+                        </div>
+                      </Link>
                     ))
                   }
                 </div>

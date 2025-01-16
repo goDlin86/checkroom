@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-
-const tags = ['shirts', 't-shirts', 'jackets', 'jeans', 'shorts', 'shoes', 'sweatshirts', 'beanies']
+import { tags } from './tags'
 
 export default function AddItem() {
   const inputFileRef = useRef(null)
@@ -50,14 +49,14 @@ export default function AddItem() {
 
         <div className={"transition-opacity duration-500 " + (selectedImg ? "opacity-100" : "opacity-0 invisible")}>
           <div className="relative max-w-56 mx-auto mt-4 overflow-hidden rounded-2xl">
-          <img ref={inputImg} className="block object-cover w-full h-72 text-center" />
+            <img ref={inputImg} className="block object-cover w-full h-72 text-center" />
           </div>
           <input 
             className="rounded-full w-full mt-4 px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)]" 
             name="name" 
             type="text" 
             ref={inputName} 
-            placeholder="Name" 
+            placeholder="Name"
             required 
           />
           <select id="tags" name="tags" className="block mx-auto bg-white/10 mt-4 px-4 py-1 rounded-full text-center" value={selectedTag} onChange={e => setSelectedTag(e.target.value)}>
@@ -74,9 +73,10 @@ export default function AddItem() {
 
 
 // CREATE TABLE items (
+//   id serial primary key,
 //   name varchar(255) NOT NULL,
 //   tag varchar(255) NOT NULL,
 //   url varchar(255) NOT NULL,
-//   createdAt timestamp DEFAULT CURRENT_TIMESTAMP,
+//   "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 //   owner int NOT NULL
 // );
