@@ -1,6 +1,6 @@
-'use server'
-
 import { sql } from '@vercel/postgres'
+
+export const dynamic = 'force-dynamic'
 
 const tags = ['shirts', 't-shirts', 'jackets', 'jeans', 'shorts', 'shoes', 'sweatshirts', 'beanies']
 
@@ -10,7 +10,7 @@ export default async function Items() {
   try {
     data = await sql`SELECT * FROM items WHERE owner = 1;`
   } catch (e) {
-    throw e
+    console.log(e)
   }
 
   const { rows: items } = data
@@ -27,7 +27,7 @@ export default async function Items() {
           <div key={tag}>
             {items.some(item => item.tag == tag) && 
               <>
-                <h1 id={tag} className="text-xl uppercase">{tag}</h1>
+                <h1 id={tag} className="text-xl uppercase my-2">{tag}</h1>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {
                     items.filter(item => item.tag === tag).map((item, i) => (
