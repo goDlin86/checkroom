@@ -1,6 +1,8 @@
 import Link from "next/link"
 import Items from "../components/Items"
 
+export const dynamic = 'force-dynamic'
+
 export default function Home() {
   return (
     <div className="font-[family-name:var(--font-geist-mono)] container mx-auto max-w-4xl">

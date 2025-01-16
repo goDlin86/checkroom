@@ -1,7 +1,5 @@
 import { sql } from '@vercel/postgres'
 
-export const dynamic = 'force-dynamic'
-
 const tags = ['shirts', 't-shirts', 'jackets', 'jeans', 'shorts', 'shoes', 'sweatshirts', 'beanies']
 
 export default async function Items() {
