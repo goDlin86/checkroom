@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import toast from 'react-hot-toast'
 import { tags } from './tags'
 
 export default function AddItem() {
@@ -9,6 +10,13 @@ export default function AddItem() {
   const inputName = useRef(null)
   const [selectedImg, setSelectedImg] = useState(false)
   const [selectedTag, setSelectedTag] = useState('shirts')
+  const [isUploading, setIsUploading] = useState(false)
+
+  function reset() {
+    inputFileRef.current.reset
+    setSelectedImg(false)
+    setSelectedTag('shirts')
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -20,6 +28,7 @@ export default function AddItem() {
 
           const [file] = inputFileRef.current.files
 
+          setIsUploading(true)
           const response = await fetch(
             `/api/items/add?filename=${inputName.current.value}&tag=${selectedTag}&type=${file.type}`,
             {
@@ -28,8 +37,12 @@ export default function AddItem() {
             },
           )
 
+          setIsUploading(false)
           if (response.ok) {
-            
+            toast.success('Item added!')
+            reset()
+          } else {
+            toast.error('Error!')
           }
         }}
       >
@@ -48,7 +61,7 @@ export default function AddItem() {
         </div>
 
         <div className={"transition-opacity duration-500 " + (selectedImg ? "opacity-100" : "opacity-0 invisible")}>
-          <div className="relative max-w-56 mx-auto mt-4 overflow-hidden rounded-2xl">
+          <div className="relative max-w-56 mx-auto overflow-hidden rounded-2xl">
             <img ref={inputImg} className="block object-cover w-full h-72 text-center" />
           </div>
           <input 
@@ -64,7 +77,23 @@ export default function AddItem() {
               <option key={tag} value={tag}>{tag}</option>
             ))}
           </select>
-          <button className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold" type="submit">Add</button>
+          <div className="flex">
+            <button 
+              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:border-white/10 disabled:text-white/10" 
+              type="reset" 
+              disabled={isUploading} 
+              onClick={reset}
+            >
+              Reset
+            </button>
+            <button 
+              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:border-white/10 disabled:text-white/10" 
+              type="submit" 
+              disabled={isUploading}
+            >
+              Add
+            </button>
+          </div>
         </div>
       </form>
     </div>
