@@ -29,6 +29,8 @@ export default function Item({ item }) {
     setIsUpdating(false)
     if (response.ok) {
       toast.success('Item updated!')
+      item.name = name
+      item.tag = selectedTag
     } else {
       toast.error('Error!')
     }
