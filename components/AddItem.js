@@ -13,7 +13,7 @@ export default function AddItem() {
   const [isUploading, setIsUploading] = useState(false)
 
   function reset() {
-    inputFileRef.current.reset
+    inputFileRef.current.value = null
     setSelectedImg(false)
     setSelectedTag('shirts')
   }
