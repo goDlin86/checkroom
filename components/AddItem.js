@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import toast from 'react-hot-toast'
-import { tags } from './tags'
+import { tags } from '../lib/tags'
 
 export default function AddItem() {
   const inputFileRef = useRef(null)

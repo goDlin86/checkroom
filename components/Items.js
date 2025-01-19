@@ -1,6 +1,8 @@
 import { sql } from '@vercel/postgres'
 import Link from 'next/link'
-import { tags } from './tags'
+import { tags } from '../lib/tags'
+import { getServerSession } from 'next-auth'
+import MailRuProvider from 'next-auth/providers/mailru'
 
 export default async function Items() {
   let data
@@ -12,6 +14,16 @@ export default async function Items() {
   }
 
   const { rows: items } = data
+
+  const session = await getServerSession({
+    providers: [
+      MailRuProvider({
+        clientId: process.env.MAILRU_CLIENT_ID,
+        clientSecret: process.env.MAILRU_CLIENT_SECRET
+      })
+    ],
+  })
+  console.log(session)
 
   return (
     <>

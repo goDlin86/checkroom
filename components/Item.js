@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { tags } from './tags'
+import { tags } from '../lib/tags'
 
 export default function Item({ item }) {
   const [name, setName] = useState(item.name)
