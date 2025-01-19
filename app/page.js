@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Auth from "../components/Auth"
 import Items from "../components/Items"
 
 export const dynamic = 'force-dynamic'
