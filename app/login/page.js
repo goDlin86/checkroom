@@ -16,6 +16,17 @@ export default function LoginPage() {
         >
           <button className="w-full">Sign in with Mail.ru</button>
         </form>
+        <form
+          action={async () => {
+            'use server'
+            await signIn('github', {
+              redirectTo: '/'
+            });
+          }}
+          className="w-full"
+        >
+          <button className="w-full">Sign in with Github</button>
+        </form>
       </div>
     </div>
   )
