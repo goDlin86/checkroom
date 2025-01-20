@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google"
-import Auth from "../components/Auth"
-import Providers from "./providers"
+import { Auth } from "../components/Auth"
+//import Providers from "./providers"
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "react-hot-toast"
 import "./globals.css"
@@ -24,7 +24,7 @@ export default function RootLayout({ children, params: { session } }) {
   return (
     <html className="scroll-smooth" lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers session={session}>
+        {/* <Providers session={session}> */}
           <div className="font-[family-name:var(--font-geist-mono)] container mx-auto max-w-4xl">
             <header className="p-4 text-4xl">
               checkroom
@@ -35,7 +35,7 @@ export default function RootLayout({ children, params: { session } }) {
 
             </footer>
           </div>
-        </Providers>
+        {/* </Providers> */}
         <Toaster />
         <Analytics />
       </body>

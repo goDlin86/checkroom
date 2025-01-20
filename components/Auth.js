@@ -1,21 +1,25 @@
-'use client'
+import Link from 'next/link'
+import { auth, signOut } from '../lib/auth'
 
-import { useSession, signIn, signOut } from 'next-auth/react'
+export async function Auth() {
+  let session = await auth()
+  let user = session?.user
+  console.log(user)
 
-export default function Auth() {
-  const { data: session } = useSession()
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
   return (
     <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      {user ? (
+        <form
+          action={async () => {
+            'use server'
+            await signOut()
+          }}
+        >
+          <button type="submit">Sign Out</button>
+        </form>
+      ) : (
+        <Link href="/login">Sign In</Link>
+      )}
     </>
   )
 }
