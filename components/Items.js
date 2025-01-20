@@ -29,7 +29,7 @@ export default async function Items() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {
                     items.filter(item => item.tag === tag).map((item, i) => (
-                      <Link href={`/item/${item.id}`} key={i}>
+                      <Link href={`/items/${item.id}`} key={i}>
                         <div className="relative overflow-hidden rounded-2xl">
                           <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
                         </div>

@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres'
-import Link from "next/link"
-import Item from "../../../components/Item"
+import Link from 'next/link'
+import Item from '../../../components/Item'
 
 export default async function Page({ params }) {
   const id = (await params).id
@@ -17,7 +17,7 @@ export default async function Page({ params }) {
 
   return (
     <main className="px-4 lg:px-0">
-      <Link className="ml-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer text-xl align-middle" href="/">Home</Link>
+      <Link className="ml-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer text-xl align-middle" href="/items">Home</Link>
       <Item item={item} />
     </main>
   )

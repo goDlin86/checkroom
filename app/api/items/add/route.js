@@ -1,7 +1,11 @@
 import { put } from '@vercel/blob'
 import { sql } from '@vercel/postgres'
+import { auth } from '../../../../lib/auth'
 
 export async function POST(request) {
+  const session = await auth(request)
+  console.log(session)
+
   const { searchParams } = new URL(request.url)
   const filename = searchParams.get('filename')
   const tag = searchParams.get('tag')

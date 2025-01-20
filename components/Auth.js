@@ -4,7 +4,6 @@ import { auth, signOut } from '../lib/auth'
 export async function Auth() {
   let session = await auth()
   let user = session?.user
-  console.log(user)
 
   return (
     <>
@@ -15,10 +14,10 @@ export async function Auth() {
             await signOut()
           }}
         >
-          <button type="submit">Sign Out</button>
+          <button className="ml-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer text-xl align-middle float-right" type="submit">Sign Out</button>
         </form>
       ) : (
-        <Link href="/login">Sign In</Link>
+        <Link className="ml-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer text-xl align-middle float-right" href="/login">Sign In</Link>
       )}
     </>
   )

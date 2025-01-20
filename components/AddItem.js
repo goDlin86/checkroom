@@ -107,5 +107,5 @@ export default function AddItem() {
 //   tag varchar(255) NOT NULL,
 //   url varchar(255) NOT NULL,
 //   "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-//   owner int NOT NULL
+//   owner varchar(255) NOT NULL
 // );

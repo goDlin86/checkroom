@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google"
-import { Auth } from "../components/Auth"
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "react-hot-toast"
 import "./globals.css"
@@ -22,17 +21,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html className="scroll-smooth" lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="font-[family-name:var(--font-geist-mono)] container mx-auto max-w-4xl">
-          <header className="p-4 text-4xl">
-            checkroom
-            <Auth />
-          </header>
-          {children}
-          <footer className="flex gap-6 flex-wrap items-center justify-center">
-
-          </footer>
-        </div>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-mono)]`}>
+        {children}
         <Toaster />
         <Analytics />
       </body>
