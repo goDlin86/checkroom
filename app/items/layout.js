@@ -3,8 +3,8 @@ import { Auth } from "../../components/Auth"
 export default function Layout({ children }) {
   return (
     <div className="container mx-auto max-w-4xl">
-      <header className="p-4 text-4xl">
-        checkroom
+      <header className="p-4 text-4xl flex place-content-between">
+        <div>checkroom</div>
         <Auth />
       </header>
       {children}
