@@ -1,5 +1,6 @@
 import { del } from '@vercel/blob'
 import { sql } from '@vercel/postgres'
+import { auth } from '../../../../lib/auth'
 
 export const POST = auth(async (req) => {
   if (!req.auth) return Response.json({ message: "Not authenticated" }, { status: 401 })
