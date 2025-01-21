@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { tags } from '../lib/tags'
 
@@ -20,6 +21,7 @@ export default function AddItem() {
 
   return (
     <div className="flex flex-col items-center">
+      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl align-middle" href="/items">Home</Link>
       <div className="text-2xl font-bold py-4">Add Item</div>
 
       <form
