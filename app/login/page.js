@@ -14,7 +14,7 @@ export default function LoginPage() {
           }}
           className="w-full"
         >
-          <button className="w-full my-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer text-xl align-middle">Sign in with Mail.ru</button>
+          <button className="w-full my-2 px-4 py-1 border-2 rounded-full cursor-pointer text-xl align-middle">Sign in with Mail.ru</button>
         </form>
         <form
           action={async () => {
@@ -25,7 +25,7 @@ export default function LoginPage() {
           }}
           className="w-full"
         >
-          <button className="w-full my-2 px-4 py-1 border-2 rounded-full inline-block cursor-pointer text-xl align-middle">Sign in with Github</button>
+          <button className="w-full my-2 px-4 py-1 border-2 rounded-full cursor-pointer text-xl align-middle">Sign in with Github</button>
         </form>
       </div>
     </div>

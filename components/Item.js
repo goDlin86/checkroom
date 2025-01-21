@@ -63,7 +63,7 @@ export default function Item({ item }) {
 
   return (
     <div className="flex flex-col items-center">
-      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl align-middle" href="/items">Home</Link>
+      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl" href="/items">Home</Link>
       <div className="text-2xl font-bold py-4">Edit Item</div>
 
       <form onSubmit={del} >
