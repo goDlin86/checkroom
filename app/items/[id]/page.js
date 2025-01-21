@@ -1,13 +1,19 @@
 import { sql } from '@vercel/postgres'
 import Link from 'next/link'
 import Item from '../../../components/Item'
+import { auth } from '../../../lib/auth'
 
 export default async function Page({ params }) {
+  let session = await auth()
+  let user = session?.user
+
+  if (!user) return <p className="my-4 text-center">Need to sign in</p>
+
   const id = (await params).id
   let data
 
   try {
-    data = await sql`SELECT * FROM items WHERE id = ${id};`
+    data = await sql`SELECT * FROM items WHERE id = ${id} AND owner=${user.email};`
   } catch (e) {
     console.log(e)
   }

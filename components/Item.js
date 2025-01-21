@@ -54,7 +54,7 @@ export default function Item({ item }) {
     setIsUpdating(false)
     if (response.ok) {
       toast.success('Item deleted!')
-      redirect('/')
+      redirect('/items')
     } else {
       toast.error('Error!')
     }
