@@ -2,11 +2,11 @@ import { sql } from '@vercel/postgres'
 import Link from 'next/link'
 import { tags } from '../lib/tags'
 
-export default async function Items() {
+export default async function Items({ user }) {
   let data
 
   try {
-    data = await sql`SELECT * FROM items WHERE owner = 1;`
+    data = await sql`SELECT * FROM items WHERE owner = ${user};`
   } catch (e) {
     console.log(e)
   }
