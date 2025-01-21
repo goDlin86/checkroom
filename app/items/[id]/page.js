@@ -13,13 +13,14 @@ export default async function Page({ params }) {
   let data
 
   try {
-    data = await sql`SELECT * FROM items WHERE id = ${id} AND owner=${user.email};`
+    data = await sql`SELECT * FROM items WHERE id=${id} AND owner=${user.email};`
   } catch (e) {
     console.log(e)
   }
 
   const { rows: items } = data
   const item = items[0]
+  console.log(item)
 
   return (
     <main className="px-4 lg:px-0">
