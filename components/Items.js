@@ -6,7 +6,7 @@ export default async function Items({ user }) {
   let data
 
   try {
-    data = await sql`SELECT * FROM items WHERE owner = ${user} ORDER BY createdAt DESC;`
+    data = await sql`SELECT * FROM items WHERE owner = ${user} ORDER BY "createdAt" DESC;`
   } catch (e) {
     console.log(e)
   }

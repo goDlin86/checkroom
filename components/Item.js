@@ -82,7 +82,7 @@ export default function Item({ item }) {
             <option key={tag} value={tag}>{tag}</option>
           ))}
         </select>
-        <p className="mt-4">Added {item.createdat.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Europe/Moscow' })}</p>
+        <p className="mt-4">Added {item.createdAt.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Europe/Moscow' })}</p>
         <div className="flex">
           <button 
             className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:border-white/10 disabled:text-white/10" 
