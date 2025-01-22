@@ -1,14 +1,22 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Auth } from "../components/Auth"
+import { auth } from "../lib/auth"
 
-export default function Home() {
+export default async function Home() {
+  let session = await auth()
+  let user = session?.user
+
   return (
     <div className="container mx-auto max-w-4xl">
       <header className="p-4 text-4xl flex place-content-between">
         <div>checkroom</div>
         <Auth />
       </header>
-      <Image className="mx-auto mt-4" width={512} height={512} src={"/img/android-chrome-512x512.png"} alt="checkroom" />
+      <Link href={user ? "/items" : "/login"} className="block mt-4 underline text-center text-2xl">
+        <Image className="mx-auto" width={512} height={512} src={"/img/android-chrome-512x512.png"} alt="checkroom" />
+        to my checkroom
+      </Link>
       <footer className="flex gap-6 flex-wrap items-center justify-center">
 
       </footer>
