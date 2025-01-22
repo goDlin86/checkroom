@@ -8,7 +8,7 @@ export default async function Add() {
   if (!user) return <p className="my-4 text-center">Need to sign in</p>
 
   return (
-    <main className="px-4 lg:px-0">
+    <main className="px-4 lg:px-0 pb-6">
       <AddItem />
     </main>
   )

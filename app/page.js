@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Auth } from "../components/Auth"
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
         <div>checkroom</div>
         <Auth />
       </header>
-      
+      <Image className="mx-auto mt-4" width={512} height={512} src={"/img/android-chrome-512x512.png"} alt="checkroom" />
       <footer className="flex gap-6 flex-wrap items-center justify-center">
 
       </footer>

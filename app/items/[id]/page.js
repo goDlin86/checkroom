@@ -21,7 +21,7 @@ export default async function Page({ params }) {
   const item = items[0]
 
   return (
-    <main className="px-4 lg:px-0">
+    <main className="px-4 lg:px-0 pb-6">
       <Item item={item} />
     </main>
   )
