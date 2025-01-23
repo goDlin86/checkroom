@@ -1,4 +1,5 @@
 import { signIn } from '../../lib/auth'
+import { SHA256, enc, lib } from 'crypto-js'
 
 export default function LoginPage() {
   return (
@@ -8,9 +9,7 @@ export default function LoginPage() {
         <form
           action={async () => {
             'use server'
-            await signIn('mailru', {
-              redirectTo: '/items'
-            });
+            await signIn('mailru', { redirectTo: '/items' }, { 'state': SHA256(lib.WordArray.random(10)).toString(enc.Hex) })
           }}
           className="w-full"
         >
@@ -19,9 +18,7 @@ export default function LoginPage() {
         <form
           action={async () => {
             'use server'
-            await signIn('github', {
-              redirectTo: '/items'
-            });
+            await signIn('github', { redirectTo: '/items' })
           }}
           className="w-full"
         >
@@ -30,9 +27,7 @@ export default function LoginPage() {
         <form
           action={async () => {
             'use server'
-            await signIn('google', {
-              redirectTo: '/items'
-            });
+            await signIn('google', { redirectTo: '/items' })
           }}
           className="w-full"
         >

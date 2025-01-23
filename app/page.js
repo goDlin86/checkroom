@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <div className="container mx-auto max-w-4xl">
       <header className="p-4 flex place-content-between">
-        <div className="text-4xl">checkroom</div>
+        <Link className="text-4xl" href="/">checkroom</Link>
         <Auth />
       </header>
       <Link href={user ? "/items" : "/login"} className="block mt-4 underline text-center text-2xl">

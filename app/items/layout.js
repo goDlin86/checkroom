@@ -4,7 +4,7 @@ export default function Layout({ children }) {
   return (
     <div className="container mx-auto max-w-4xl">
       <header className="p-4 flex place-content-between">
-        <div className="text-4xl">checkroom</div>
+        <Link className="text-4xl" href="/">checkroom</Link>
         <Auth />
       </header>
       {children}
