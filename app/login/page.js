@@ -27,6 +27,17 @@ export default function LoginPage() {
         >
           <button className="w-full my-2 px-4 py-1 border-2 rounded-full cursor-pointer text-xl align-middle">Sign in with Github</button>
         </form>
+        <form
+          action={async () => {
+            'use server'
+            await signIn('google', {
+              redirectTo: '/items'
+            });
+          }}
+          className="w-full"
+        >
+          <button className="w-full my-2 px-4 py-1 border-2 rounded-full cursor-pointer text-xl align-middle">Sign in with Google</button>
+        </form>
       </div>
     </div>
   )

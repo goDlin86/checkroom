@@ -9,7 +9,7 @@ export default function AddItem() {
   const inputFileRef = useRef(null)
   const inputImg = useRef(null)
   const inputName = useRef(null)
-  const [AIClass, setAIClass] = useState('')
+  const [AIClass, setAIClass] = useState('...')
   const [selectedImg, setSelectedImg] = useState(false)
   const [selectedTag, setSelectedTag] = useState('shirts')
   const [isUploading, setIsUploading] = useState(false)
@@ -18,7 +18,7 @@ export default function AddItem() {
     inputFileRef.current.value = null
     setSelectedImg(false)
     setSelectedTag('shirts')
-    setAIClass('')
+    setAIClass('...')
   }
 
   async function hf(file) {
