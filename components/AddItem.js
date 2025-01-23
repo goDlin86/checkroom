@@ -35,7 +35,7 @@ export default function AddItem() {
 
   return (
     <div className="flex flex-col items-center">
-      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl" href="/items">Home</Link>
+      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items">Home</Link>
       <div className="text-2xl font-bold py-4">Add Item</div>
 
       <form
@@ -98,7 +98,7 @@ export default function AddItem() {
           </select>
           <div className="flex">
             <button 
-              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:border-white/10 disabled:text-white/10" 
+              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:text-white/50" 
               type="reset" 
               disabled={isUploading} 
               onClick={reset}
@@ -106,7 +106,7 @@ export default function AddItem() {
               Reset
             </button>
             <button 
-              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:border-white/10 disabled:text-white/10" 
+              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:text-white/50" 
               type="submit" 
               disabled={isUploading}
             >

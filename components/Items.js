@@ -17,7 +17,7 @@ export default async function Items({ user }) {
     <>
       <div className="py-2 overflow-x-scroll whitespace-nowrap scrollbar">
         {tags.map(tag => (
-          <a className="mx-2 px-3 py-1 border-2 rounded-full inline-block cursor-pointer" href={`#${tag}`} key={tag}>{tag}</a>
+          <a className="mx-2 px-3 py-1 border-2 rounded-full inline-block cursor-pointer transition-colors duration-500 hover:text-white/50" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
       </div>
       <div className="px-4 lg:px-0">
@@ -25,7 +25,7 @@ export default async function Items({ user }) {
           <div key={tag}>
             {items.some(item => item.tag == tag) && 
               <>
-                <h1 id={tag} className="text-xl uppercase my-2">{tag}</h1>
+                <h1 id={tag} className="text-xl uppercase my-2 font-bold">{tag}</h1>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {
                     items.filter(item => item.tag === tag).map((item, i) => (
