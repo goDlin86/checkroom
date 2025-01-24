@@ -1,16 +1,11 @@
 import { signIn } from '../../lib/auth'
-import { SHA256, enc, lib } from 'crypto-js'
 
 const LoginButton = ({ provider }) => {
   return (
     <form
       action={async () => {
         'use server'
-        await signIn(
-          provider, 
-          { redirectTo: '/items' }, 
-          provider === 'mailru' ? { 'state': SHA256(lib.WordArray.random(10)).toString(enc.Hex)} : {}
-        )
+        await signIn(provider, { redirectTo: '/items' })
       }}
     >
       <button className="w-full my-2 px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50">Sign in with {provider}</button>
