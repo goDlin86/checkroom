@@ -53,12 +53,13 @@ export default function AddItem() {
             },
           )
 
+          const r = await response.json()
           setIsUploading(false)
           if (response.ok) {
-            toast.success('Item added!')
+            toast.success(r.message)
             reset()
           } else {
-            toast.error('Error!')
+            toast.error(r.message)
           }
         }}
       >

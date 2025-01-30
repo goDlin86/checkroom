@@ -27,13 +27,14 @@ export default function Item({ item }) {
       },
     )
 
+    const r = await response.json()
     setIsUpdating(false)
     if (response.ok) {
-      toast.success('Item updated!')
+      toast.success(r.message)
       item.name = name
       item.tag = selectedTag
     } else {
-      toast.error('Error!')
+      toast.error(r.message)
     }
   }
 
@@ -52,12 +53,13 @@ export default function Item({ item }) {
       },
     )
 
+    const r = await response.json()
     setIsUpdating(false)
     if (response.ok) {
-      toast.success('Item deleted!')
+      toast.success(r.message)
       redirect('/items')
     } else {
-      toast.error('Error!')
+      toast.error(r.message)
     }
   }
 
