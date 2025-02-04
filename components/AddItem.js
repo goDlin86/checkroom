@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { tags } from '../lib/tags'
+import { Copy } from 'lucide-react'
 
 export default function AddItem() {
   const inputFileRef = useRef(null)
@@ -64,15 +65,19 @@ export default function AddItem() {
         }}
       >
         <div className={selectedImg ? "hidden" : ""}>
-          <input 
+          <div className="relative">
+            <input 
               className="rounded-full w-full px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)] bg-right bg-no-repeat" 
               name="name" 
               type="text" 
               placeholder="Paste URL for product page"
-              onChange={async (e) => {
+              readOnly
+              onChange={async () => {
                 //alert(e.target.value)
               }} 
             />
+            <div className="absolute right-3 top-1.5 cursor-pointer text-white/40"><Copy /></div>
+          </div>
           <div className="my-4 text-center text-white/40">or</div>
           <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
             <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase">Choose image</div>
