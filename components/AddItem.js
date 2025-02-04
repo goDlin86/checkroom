@@ -63,19 +63,31 @@ export default function AddItem() {
           }
         }}
       >
-        <div className={"relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl " + (selectedImg ? "hidden" : "")}>
-          <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase">Choose image</div>
-          <div className="text-white/20 text-center">or drag and drop image here</div>
-          <input className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" type="file" accept="image/*" ref={inputFileRef} required 
-            onChange={async () => {
-              const [file] = inputFileRef.current.files
-              if (file) {
-                setSelectedImg(true)
-                inputImg.current.src = URL.createObjectURL(file)
-                hf(file)
-              }
-            }}
-          />
+        <div className={selectedImg ? "hidden" : ""}>
+          <input 
+              className="rounded-full w-full px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)] bg-right bg-no-repeat" 
+              name="name" 
+              type="text" 
+              placeholder="Paste URL for product page"
+              onChange={async (e) => {
+                //alert(e.target.value)
+              }} 
+            />
+          <div className="my-4 text-center text-white/40">or</div>
+          <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
+            <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase">Choose image</div>
+            <div className="text-white/20 text-center">or drag and drop image here</div>
+            <input className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" type="file" accept="image/*" ref={inputFileRef} required 
+              onChange={async () => {
+                const [file] = inputFileRef.current.files
+                if (file) {
+                  setSelectedImg(true)
+                  inputImg.current.src = URL.createObjectURL(file)
+                  hf(file)
+                }
+              }}
+            />
+          </div>
         </div>
 
         <div className={"transition-opacity duration-500" + (selectedImg ? "opacity-100" : "opacity-0 invisible")}>

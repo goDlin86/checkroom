@@ -1,3 +1,5 @@
+import { TextShimmer } from "../../components/TextShimmer"
+
 export default function Loading() {
-  return <p className="text-center p-12">Loading...</p>
+  return <div className='text-center p-12'><TextShimmer duration={0.5}>Loading...</TextShimmer></div>
 }
