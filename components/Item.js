@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { tags } from '../lib/tags'
+import { ChevronLeft } from 'lucide-react'
 
 export default function Item({ item }) {
   const [name, setName] = useState(item.name)
@@ -65,7 +66,7 @@ export default function Item({ item }) {
 
   return (
     <div className="flex flex-col items-center">
-      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items">Home</Link>
+      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Edit Item</div>
 
       <form onSubmit={del} >

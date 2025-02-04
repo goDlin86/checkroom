@@ -1,7 +1,6 @@
 import { sql } from '@vercel/postgres'
 import Link from 'next/link'
 import { tags } from '../lib/tags'
-import { TextShimmer } from './TextShimmer'
 
 export default async function Items({ user }) {
   let data

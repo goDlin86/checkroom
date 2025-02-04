@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { tags } from '../lib/tags'
-import { Copy } from 'lucide-react'
+import { Copy, ChevronLeft } from 'lucide-react'
 
 export default function AddItem() {
   const inputFileRef = useRef(null)
@@ -36,7 +36,7 @@ export default function AddItem() {
 
   return (
     <div className="flex flex-col items-center">
-      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items">Home</Link>
+      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Add Item</div>
 
       <form
