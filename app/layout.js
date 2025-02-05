@@ -23,7 +23,23 @@ export default function RootLayout({ children }) {
     <html className="scroll-smooth" lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-mono)]`}>
         {children}
-        <Toaster />
+        <Toaster toastOptions={{
+          style: {
+            borderRadius: '100px',
+            background: '#333',
+            color: '#fff',
+          },
+          success: {
+            style: {
+              background: 'green',
+            },
+          },
+          error: {
+            style: {
+              background: 'red',
+            },
+          },
+        }} />
         <Analytics />
       </body>
     </html>

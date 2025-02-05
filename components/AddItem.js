@@ -46,6 +46,7 @@ export default function AddItem() {
           const [file] = inputFileRef.current.files
 
           setIsUploading(true)
+          const toastId = toast.loading('Loading...')
           const response = await fetch(
             `/api/items/add?filename=${inputName.current.value}&tag=${selectedTag}&type=${file.type}`,
             {
@@ -56,6 +57,7 @@ export default function AddItem() {
 
           const r = await response.json()
           setIsUploading(false)
+          toast.dismiss(toastId)
           if (response.ok) {
             toast.success(r.message)
             reset()

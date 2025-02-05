@@ -16,6 +16,7 @@ export default function Item({ item }) {
     e.preventDefault()
 
     setIsUpdating(true)
+    const toastId = toast.loading('Loading...')
     const response = await fetch(
       '/api/items/update',
       {
@@ -30,6 +31,7 @@ export default function Item({ item }) {
 
     const r = await response.json()
     setIsUpdating(false)
+    toast.dismiss(toastId)
     if (response.ok) {
       toast.success(r.message)
       item.name = name
@@ -43,6 +45,7 @@ export default function Item({ item }) {
     e.preventDefault()
 
     setIsUpdating(true)
+    const toastId = toast.loading('Loading...')
     const response = await fetch(
       `/api/items/del`,
       {
@@ -56,8 +59,9 @@ export default function Item({ item }) {
 
     const r = await response.json()
     setIsUpdating(false)
+    toast.dismiss(toastId)
     if (response.ok) {
-      toast.success(r.message)
+      toast.success(r.message, { style: { background: 'red' }})
       redirect('/items')
     } else {
       toast.error(r.message)
