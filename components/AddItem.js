@@ -15,6 +15,20 @@ export default function AddItem() {
   const [selectedTag, setSelectedTag] = useState('shirts')
   const [isUploading, setIsUploading] = useState(false)
 
+  async function getProduct() {
+    // const response = await fetch(
+    //   `/api/getProduct`,
+    //   {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       url: 'https://www.wildberries.ru/catalog/247232809/detail.aspx'
+    //     })
+    //   },
+    // )
+    // const data = await response.json()
+    // console.log(data.message)
+  }
+
   function reset() {
     inputFileRef.current.value = null
     setSelectedImg(false)
@@ -31,7 +45,11 @@ export default function AddItem() {
       },
     )
     const data = await response.json()
-    setAIClass(data.message)
+    if (response.ok) {
+      setAIClass(data.message)
+    } else {
+      toast.error(data.message)
+    }
   }
 
   return (
@@ -78,7 +96,7 @@ export default function AddItem() {
                 //alert(e.target.value)
               }} 
             />
-            <div className="absolute right-3 top-1.5 cursor-pointer text-white/40"><Copy /></div>
+            <div className="absolute right-3 top-1.5 cursor-pointer text-white/40" onClick={getProduct}><Copy /></div>
           </div>
           <div className="my-4 text-center text-white/40">or</div>
           <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
