@@ -16,7 +16,6 @@
     "cheerio": "^1",
     "clsx": "^2",
     "crypto-js": "^4.2.0",
-    "got-scraping": "^4.1.1",
     "lucide-react": "^0",
     "motion": "^12",
     "next": "^15",

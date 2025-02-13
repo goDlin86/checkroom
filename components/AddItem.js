@@ -26,12 +26,8 @@ export default function AddItem() {
   }
 
   const isValidUrl = urlString => {
-    try { 
-      return Boolean(new URL(urlString))
-    }
-    catch { 
-      return false
-    }
+    try { return Boolean(new URL(urlString)) }
+    catch { return false }
   }
 
   async function getItemData() {   
