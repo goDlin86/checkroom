@@ -10,7 +10,7 @@ export const POST = auth(async (req) => {
   try {
     await del(blob)
     await sql`DELETE FROM items WHERE id=${id} AND owner=${req.auth.user.email};`
-    return Response.json({ message: 'Item deleted!' }, { status: 200 })
+    return Response.json({ message: 'Item deleted!' })
   } catch (e) {
     console.log(e)
     return Response.json({ message: e.message }, { status: 500 })

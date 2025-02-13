@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import { Auth } from "../components/Auth"
 import { auth } from "../lib/auth"
 import { TextShimmer } from "../components/TextShimmer"
@@ -7,6 +8,8 @@ import { TextShimmer } from "../components/TextShimmer"
 export default async function Home() {
   let session = await auth()
   let user = session?.user
+
+  if (user) redirect('/items')
 
   return (
     <div className="container mx-auto max-w-4xl">

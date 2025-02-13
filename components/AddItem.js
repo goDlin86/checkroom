@@ -5,50 +5,73 @@ import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { tags } from '../lib/tags'
 import { Copy, ChevronLeft } from 'lucide-react'
+import { TextShimmer } from './TextShimmer'
 
 export default function AddItem() {
   const inputFileRef = useRef(null)
   const inputImg = useRef(null)
   const inputName = useRef(null)
-  const [AIClass, setAIClass] = useState('...')
+  const [inputURL, setInputURL] = useState('')
+  const [AIClass, setAIClass] = useState('')
   const [selectedImg, setSelectedImg] = useState(false)
   const [selectedTag, setSelectedTag] = useState('shirts')
   const [isUploading, setIsUploading] = useState(false)
 
-  async function getProduct() {
-    // const response = await fetch(
-    //   `/api/getProduct`,
-    //   {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       url: 'https://www.wildberries.ru/catalog/247232809/detail.aspx'
-    //     })
-    //   },
-    // )
-    // const data = await response.json()
-    // console.log(data.message)
-  }
-
   function reset() {
     inputFileRef.current.value = null
+    setInputURL('')
     setSelectedImg(false)
     setSelectedTag('shirts')
-    setAIClass('...')
+    setAIClass('')
   }
 
-  async function hf(file) {
-    const response = await fetch(
-      `/api/hf`,
-      {
-        method: 'POST',
-        body: file,
-      },
-    )
+  const isValidUrl = urlString => {
+    try { 
+      return Boolean(new URL(urlString))
+    }
+    catch(e){ 
+      return false
+    }
+  }
+
+  async function getItemData() {   
+    try {
+      const text = await navigator.clipboard.readText()
+      if (!isValidUrl(text)) {
+        toast.error('Not a valid URL!')
+        return
+      }
+      setInputURL(text)
+
+      const response = await fetch(
+        '/api/items/getData',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            url: text
+          })
+        }
+      )
+      const data = await response.json()
+      
+      setSelectedImg(true)
+      inputImg.current.src = data.img
+      inputName.current.value = data.name
+      hf(data.img)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function hf(body) {
+    const response = await fetch('/api/hf', { method: 'POST', body })
     const data = await response.json()
     if (response.ok) {
       setAIClass(data.message)
     } else {
       toast.error(data.message)
+      setAIClass('Error')
     }
   }
 
@@ -62,11 +85,12 @@ export default function AddItem() {
           event.preventDefault()
 
           const [file] = inputFileRef.current.files
+          const url = inputImg.current.src
 
           setIsUploading(true)
           const toastId = toast.loading('Loading...')
           const response = await fetch(
-            `/api/items/add?filename=${inputName.current.value}&tag=${selectedTag}&type=${file.type}`,
+            `/api/items/add?filename=${inputName.current.value}&tag=${selectedTag}&type=${file ? file.type : ''}&url=${encodeURIComponent(url)}`,
             {
               method: 'POST',
               body: file,
@@ -85,42 +109,39 @@ export default function AddItem() {
         }}
       >
         <div className={selectedImg ? "hidden" : ""}>
-          <div className="relative">
-            <input 
-              className="rounded-full w-full px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)] bg-right bg-no-repeat" 
-              name="name" 
-              type="text" 
-              placeholder="Paste URL for product page"
-              readOnly
-              onChange={async () => {
-                //alert(e.target.value)
-              }} 
-            />
-            <div className="absolute right-3 top-1.5 cursor-pointer text-white/40" onClick={getProduct}><Copy /></div>
-          </div>
-          <div className="my-4 text-center text-white/40">or</div>
-          <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
-            <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase">Choose image</div>
-            <div className="text-white/20 text-center">or drag and drop image here</div>
-            <input className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" type="file" accept="image/*" ref={inputFileRef} required 
-              onChange={async () => {
-                const [file] = inputFileRef.current.files
-                if (file) {
-                  setSelectedImg(true)
-                  inputImg.current.src = URL.createObjectURL(file)
-                  hf(file)
-                }
-              }}
-            />
+          <div className={inputURL === '' ? "" : "hidden"}>
+            <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
+              <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase"><Copy /></div>
+              <div className="text-white/20 text-center">get item data by URL from clipboard</div>
+              <div className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" onClick={getItemData}></div>
+            </div>
+            <div className="my-4 text-center text-white/40">or</div>
+            <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
+              <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase">Choose image</div>
+              <div className="text-white/20 text-center">or drag and drop image here</div>
+              <input className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" type="file" accept="image/*" ref={inputFileRef} 
+                onChange={async () => {
+                  const [file] = inputFileRef.current.files
+                  if (file) {
+                    setSelectedImg(true)
+                    inputImg.current.src = URL.createObjectURL(file)
+                    hf(file)
+                  }
+                }}
+              />
+            </div>
+          </div> 
+          <div className={"py-32 text-center " + (inputURL === '' ? "hidden" : "")}>
+            <TextShimmer>Extracting data from {inputURL}...</TextShimmer>
           </div>
         </div>
 
-        <div className={"transition-opacity duration-500" + (selectedImg ? "opacity-100" : "opacity-0 invisible")}>
+        <div className={"transition-opacity duration-500 " + (selectedImg ? "opacity-100" : "opacity-0 invisible")}>
           <div className="relative max-w-56 mx-auto overflow-hidden rounded-2xl">
             <img ref={inputImg} className="block object-cover w-full h-72 text-center" />
           </div>
           <div className="mt-2 text-center">AI classification</div>
-          <div className="text-center">{AIClass}</div>
+          <div className="text-center">{AIClass === '' ? <TextShimmer duration={0.5}>...</TextShimmer>  : AIClass}</div>
           <input 
             className="rounded-full w-full mt-4 px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)]" 
             name="name" 

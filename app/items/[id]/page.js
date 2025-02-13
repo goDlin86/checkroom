@@ -6,7 +6,7 @@ export default async function Page({ params }) {
   let session = await auth()
   let user = session?.user
 
-  if (!user) return <p className="my-4 text-center">Need to sign in</p>
+  if (!user) return <p className="py-32 text-center text-xl">Need to sign in</p>
 
   const id = (await params).id
   let data
