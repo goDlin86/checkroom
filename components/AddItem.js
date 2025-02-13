@@ -29,7 +29,7 @@ export default function AddItem() {
     try { 
       return Boolean(new URL(urlString))
     }
-    catch(e){ 
+    catch { 
       return false
     }
   }
