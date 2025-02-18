@@ -3,8 +3,39 @@ import * as cheerio from 'cheerio'
 export const POST = async (req) => {
   const { url } = await req.json()
 
-  const res = await fetch(url)
-  const body = await res.text()
+  let body
+  
+  if (url.includes('wildberries.ru')) {
+    const query = `
+      mutation RetrieveHTML($url: String!) {
+        goto(url: $url, waitUntil: networkIdle, timeout: 8000) {
+          status
+        }
+        html(selector: "body") {
+          html
+        }
+      }
+    `
+
+    const res = await fetch(
+      `https://production-lon.browserless.io/chromium/bql?token=${process.env.BROWSERLESS_API}`, 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query,
+          variables: { url },
+        }),
+      }
+    )
+    const { data } = await res.json()
+    body = data.html.html
+  } else {
+    const res = await fetch(url)
+    body = await res.text()
+  }
 
   const $ = cheerio.load(body)
 

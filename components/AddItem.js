@@ -128,7 +128,8 @@ export default function AddItem() {
             </div>
           </div> 
           <div className={"py-32 text-center " + (inputURL === '' ? "hidden" : "")}>
-            <TextShimmer>Extracting data from {inputURL}...</TextShimmer>
+            <div className="text-white/50 overflow-hidden text-ellipsis">{inputURL}</div>
+            <TextShimmer>Extracting data ...</TextShimmer>
           </div>
         </div>
 
