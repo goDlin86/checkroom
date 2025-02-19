@@ -1,5 +1,7 @@
 import * as cheerio from 'cheerio'
 
+export const maxDuration = 20
+
 export const POST = async (req) => {
   const { url } = await req.json()
 
