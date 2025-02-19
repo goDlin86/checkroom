@@ -76,7 +76,7 @@ export default function AddItem() {
       <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Add Item</div>
 
-      <form
+      <form className="w-full max-w-96"
         onSubmit={async (event) => {
           event.preventDefault()
 

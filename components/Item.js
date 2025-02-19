@@ -73,7 +73,7 @@ export default function Item({ item }) {
       <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Edit Item</div>
 
-      <form onSubmit={del} >
+      <form className="w-full max-w-96" onSubmit={del}>
         <div className="relative max-w-56 mx-auto overflow-hidden rounded-2xl">
           <img className="block object-cover w-full h-72 text-center" src={item.url} />
         </div>
@@ -91,7 +91,7 @@ export default function Item({ item }) {
             <option key={tag} value={tag}>{tag}</option>
           ))}
         </select>
-        <p className="mt-4">Added {item.createdAt.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Europe/Moscow' })}</p>
+        <p className="mt-4 text-center">Added {item.createdAt.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Europe/Moscow' })}</p>
         <div className="flex">
           <button 
             className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:text-white/50" 
