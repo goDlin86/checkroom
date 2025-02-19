@@ -10,7 +10,7 @@ export const POST = async (req) => {
   if (url.includes('wildberries.ru')) {
     const query = `
       mutation RetrieveHTML($url: String!) {
-        goto(url: $url, waitUntil: networkIdle, timeout: 8000) {
+        goto(url: $url, waitUntil: networkIdle, timeout: 10000) {
           status
         }
         html(selector: "body") {
@@ -63,6 +63,7 @@ export const POST = async (req) => {
       price: $('.price-block__wallet-price').text()
     }
   }
+  console.log(json)
 
   return Response.json(json)
 }
