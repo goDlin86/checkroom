@@ -53,14 +53,19 @@ export default function AddItem() {
       )
       const data = await response.json()
       
-      setSelectedImg(true)
-      inputImg.current.src = data.img
-      inputName.current.value = data.name
-      inputPrice.current.value = data.price
-      hf(data.img)
+      if (response.ok) {
+        setSelectedImg(true)
+        inputImg.current.src = data.img
+        inputName.current.value = data.name
+        inputPrice.current.value = data.price
+        hf(data.img)
+      }
+      else {
+        toast.error(data.message)
+      }
       
-    } catch {
-      toast.error(data.message)
+    } catch (e) {
+      toast.error(e.message)
     }
   }
 
@@ -109,7 +114,7 @@ export default function AddItem() {
         }}
       >
         <div className={selectedImg ? "hidden" : ""}>
-          <div className={inputURL === '' ? "" : "hidden"}>
+          <div className={inputURL === "" ? "" : "hidden"}>
             <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
               <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase"><Copy /></div>
               <div className="text-white/20 text-center">get item data by URL from clipboard</div>
@@ -131,7 +136,7 @@ export default function AddItem() {
               />
             </div>
           </div> 
-          <div className={"py-32 text-center " + (inputURL === '' ? "hidden" : "")}>
+          <div className={"py-32 text-center " + (inputURL === "" ? "hidden" : "")}>
             <div className="text-white/50 overflow-hidden text-ellipsis">{inputURL}</div>
             <TextShimmer>Extracting data ...</TextShimmer>
           </div>
@@ -142,7 +147,7 @@ export default function AddItem() {
             <img ref={inputImg} className="block object-cover w-full h-72 text-center" />
           </div>
           <div className="mt-2 text-center">AI classification</div>
-          <div className="text-center">{AIClass === '' ? <TextShimmer duration={0.5}>...</TextShimmer>  : AIClass}</div>
+          <div className="text-center">{AIClass === "" ? <TextShimmer duration={0.5}>...</TextShimmer>  : AIClass}</div>
           <input 
             className="rounded-full w-full mt-4 px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)]" 
             name="name" 
@@ -159,7 +164,13 @@ export default function AddItem() {
             placeholder="Price" 
             required
           />
-          <select id="tags" name="tags" className="block mx-auto bg-white/10 mt-4 px-4 py-1 rounded-full text-center" value={selectedTag} onChange={e => setSelectedTag(e.target.value)}>
+          <select 
+            id="tags" 
+            name="tags" 
+            className="block mx-auto bg-white/10 mt-4 px-4 py-1 rounded-full text-center" 
+            value={selectedTag} 
+            onChange={e => setSelectedTag(e.target.value)}
+          >
             {tags.map(tag => (
               <option key={tag} value={tag}>{tag}</option>
             ))}

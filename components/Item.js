@@ -98,7 +98,13 @@ export default function Item({ item }) {
           onChange={e => setPrice(e.target.value)}
           required
         />
-        <select id="tags" name="tags" className="block mx-auto bg-white/10 mt-4 px-4 py-1 rounded-full text-center" value={selectedTag} onChange={e => setSelectedTag(e.target.value)}>
+        <select 
+          id="tags" 
+          name="tags" 
+          className="block mx-auto bg-white/10 mt-4 px-4 py-1 rounded-full text-center" 
+          value={selectedTag} 
+          onChange={e => setSelectedTag(e.target.value)}
+        >
           {tags.map(tag => (
             <option key={tag} value={tag}>{tag}</option>
           ))}
