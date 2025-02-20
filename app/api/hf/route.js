@@ -1,5 +1,7 @@
 import { HfInference } from '@huggingface/inference'
 
+export const maxDuration = 20
+
 export const POST = async (req) => {
   let blob = await req.blob()
   if (blob.type.includes('text/plain'))

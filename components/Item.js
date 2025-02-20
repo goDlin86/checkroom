@@ -9,6 +9,7 @@ import { ChevronLeft } from 'lucide-react'
 
 export default function Item({ item }) {
   const [name, setName] = useState(item.name)
+  const [price, setPrice] = useState(item.price)
   const [selectedTag, setSelectedTag] = useState(item.tag)
   const [isUpdating, setIsUpdating] = useState(false)
 
@@ -23,7 +24,8 @@ export default function Item({ item }) {
         method: 'POST',
         body: JSON.stringify({
           id: item.id,
-          name: name,
+          name,
+          price,
           tag: selectedTag
         })
       },
@@ -35,6 +37,7 @@ export default function Item({ item }) {
     if (response.ok) {
       toast.success(r.message)
       item.name = name
+      item.price = price
       item.tag = selectedTag
     } else {
       toast.error(r.message)
@@ -86,6 +89,15 @@ export default function Item({ item }) {
           onChange={e => setName(e.target.value)}
           required 
         />
+        <input 
+          className="rounded-full w-full mt-4 px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)]" 
+          name="price" 
+          type="text" 
+          placeholder="Price" 
+          defaultValue={item.price}
+          onChange={e => setPrice(e.target.value)}
+          required
+        />
         <select id="tags" name="tags" className="block mx-auto bg-white/10 mt-4 px-4 py-1 rounded-full text-center" value={selectedTag} onChange={e => setSelectedTag(e.target.value)}>
           {tags.map(tag => (
             <option key={tag} value={tag}>{tag}</option>
@@ -96,7 +108,7 @@ export default function Item({ item }) {
           <button 
             className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:text-white/50" 
             type="reset" 
-            disabled={isUpdating || (selectedTag === item.tag && name === item.name)}
+            disabled={isUpdating || (selectedTag === item.tag && name === item.name && price === item.price)}
             onClick={update}
           >
             Update

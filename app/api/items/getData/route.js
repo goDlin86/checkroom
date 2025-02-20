@@ -7,36 +7,42 @@ export const POST = async (req) => {
 
   let body
   
-  if (url.includes('wildberries.ru')) {
-    const query = `
-      mutation RetrieveHTML($url: String!) {
-        goto(url: $url, waitUntil: networkIdle, timeout: 10000) {
-          status
+  try {
+    if (url.includes('wildberries.ru')) {
+      const query = `
+        mutation RetrieveHTML($url: String!) {
+          goto(url: $url, waitUntil: networkIdle, timeout: 10000) {
+            status
+          }
+          html(selector: "body") {
+            html
+          }
         }
-        html(selector: "body") {
-          html
-        }
-      }
-    `
+      `
 
-    const res = await fetch(
-      `https://production-lon.browserless.io/chromium/bql?token=${process.env.BROWSERLESS_API}`, 
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query,
-          variables: { url },
-        }),
-      }
-    )
-    const { data } = await res.json()
-    body = data.html.html
-  } else {
-    const res = await fetch(url)
-    body = await res.text()
+      const res = await fetch(
+        `https://production-lon.browserless.io/chromium/bql?token=${process.env.BROWSERLESS_API}`, 
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            query,
+            variables: { url },
+          }),
+        }
+      )
+      const { data } = await res.json()
+      body = data.html.html
+    } else {
+      const res = await fetch(url)
+      body = await res.text()
+    }
+  }
+  catch (e) {
+    console.log(e)
+    return Response.json({ message: e.message }, { status: 500 })
   }
 
   const $ = cheerio.load(body)
@@ -54,7 +60,7 @@ export const POST = async (req) => {
     json = {
       name: $('[class^="product_name__"]>h1').text(),
       img: img[8].slice(0, -5),
-      price: $('[class^="product-delivery_price__"]').text()
+      price: $('[class^="product-delivery_price__"]').first().text()
     }
   } else { //wb
     json = {

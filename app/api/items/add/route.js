@@ -7,6 +7,7 @@ export const POST = auth(async (req) => {
   
   const { searchParams } = new URL(req.url)
   const filename = searchParams.get('filename')
+  const price = searchParams.get('price')
   const tag = searchParams.get('tag')
   const url = searchParams.get('url')
 
@@ -21,7 +22,7 @@ export const POST = auth(async (req) => {
 
   try {
     const blob = await put(filename, body, { access: 'public', contentType: type })
-    await sql`INSERT INTO items (name, tag, url, owner) VALUES (${filename}, ${tag}, ${blob.url}, ${req.auth.user.email});`
+    await sql`INSERT INTO items (name, tag, url, owner, price) VALUES (${filename}, ${tag}, ${blob.url}, ${req.auth.user.email}, ${price});`
     return Response.json({ message: 'Item added!' })
   } catch (e) {
     console.log(e)

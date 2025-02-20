@@ -11,6 +11,7 @@ export default function AddItem() {
   const inputFileRef = useRef(null)
   const inputImg = useRef(null)
   const inputName = useRef(null)
+  const inputPrice = useRef(null)
   const [inputURL, setInputURL] = useState('')
   const [AIClass, setAIClass] = useState('')
   const [selectedImg, setSelectedImg] = useState(false)
@@ -19,6 +20,8 @@ export default function AddItem() {
 
   function reset() {
     inputFileRef.current.value = null
+    inputName.current.value = ''
+    inputPrice.current.value = ''
     setInputURL('')
     setSelectedImg(false)
     setSelectedTag('shirts')
@@ -53,10 +56,11 @@ export default function AddItem() {
       setSelectedImg(true)
       inputImg.current.src = data.img
       inputName.current.value = data.name
+      inputPrice.current.value = data.price
       hf(data.img)
       
-    } catch (error) {
-      console.log(error)
+    } catch {
+      toast.error(data.message)
     }
   }
 
@@ -86,7 +90,7 @@ export default function AddItem() {
           setIsUploading(true)
           const toastId = toast.loading('Loading...')
           const response = await fetch(
-            `/api/items/add?filename=${inputName.current.value}&tag=${selectedTag}&type=${file ? file.type : ''}&url=${encodeURIComponent(url)}`,
+            `/api/items/add?filename=${inputName.current.value}&price=${inputPrice.current.value}&tag=${selectedTag}&type=${file ? file.type : ''}&url=${file ? '' : encodeURIComponent(url)}`,
             {
               method: 'POST',
               body: file,
@@ -146,6 +150,14 @@ export default function AddItem() {
             ref={inputName} 
             placeholder="Name"
             required 
+          />
+          <input 
+            className="rounded-full w-full mt-4 px-4 py-1 bg-white/10 border-2 border-white/10 text-center font-[family-name:var(--font-geist-mono)]" 
+            name="price" 
+            type="text" 
+            ref={inputPrice} 
+            placeholder="Price" 
+            required
           />
           <select id="tags" name="tags" className="block mx-auto bg-white/10 mt-4 px-4 py-1 rounded-full text-center" value={selectedTag} onChange={e => setSelectedTag(e.target.value)}>
             {tags.map(tag => (
