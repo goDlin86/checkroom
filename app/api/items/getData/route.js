@@ -1,3 +1,4 @@
+//import { HfInference } from '@huggingface/inference'
 import * as cheerio from 'cheerio'
 
 export const maxDuration = 20
@@ -8,7 +9,7 @@ export const POST = async (req) => {
   let body
   
   try {
-    if (url.includes('wildberries.ru')) {
+    if (!url.includes('usmall.ru')) {
       const query = `
         mutation RetrieveHTML($url: String!) {
           goto(url: $url, waitUntil: networkIdle, timeout: 10000) {
@@ -21,7 +22,7 @@ export const POST = async (req) => {
       `
 
       const res = await fetch(
-        `https://production-lon.browserless.io/chromium/bql?token=${process.env.BROWSERLESS_API}`, 
+        `https://production-lon.browserless.io/chrome/bql?token=${process.env.BROWSERLESS_API}&proxy=residential&proxyCountry=ru&humanlike=true`, 
         {
           method: 'POST',
           headers: {
@@ -45,6 +46,26 @@ export const POST = async (req) => {
     return Response.json({ message: e.message }, { status: 500 })
   }
 
+  // const inference = new HfInference(process.env.HF_TOKEN)
+
+  // try {
+  //   const chatCompletion = await inference.chatCompletion({
+  //     //model: 'deepseek-ai/DeepSeek-V3',
+  //     model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free',
+  //     messages: [
+  //       {
+  //         role: 'user',
+  //         content: 'get product title, product price, url of product image from HTML ' + body
+  //       }
+  //     ],
+  //     provider: 'together',
+  //   })
+  //   console.log(chatCompletion.choices[0].message)
+  // } catch (e) {
+  //   console.log(e)
+  //   return Response.json({ message: e.message }, { status: 500 })
+  // }
+
   const $ = cheerio.load(body)
 
   let json = {}
@@ -62,7 +83,15 @@ export const POST = async (req) => {
       img: img[8].slice(0, -5),
       price: $('[class^="product-delivery_price__"]').first().text()
     }
-  } else { //wb
+  } 
+  else if (url.includes('brd.ru')) {
+    json = {
+      name: $('div[itemprop="name"]').text(),
+      img: $('img[itemprop="image"]').first().attr('src'),
+      price: $('span.price_active'). text()
+    }
+  }
+  else { //wb
     json = {
       name: $('.product-page__title').text(),
       img: $('.zoom-image-container>img').attr('src'),

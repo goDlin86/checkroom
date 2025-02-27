@@ -62,10 +62,12 @@ export default function AddItem() {
       }
       else {
         toast.error(data.message)
+        setInputURL('')
       }
       
     } catch (e) {
       toast.error(e.message)
+      setInputURL('')
     }
   }
 
@@ -116,7 +118,8 @@ export default function AddItem() {
         <div className={selectedImg ? "hidden" : ""}>
           <div className={inputURL === "" ? "" : "hidden"}>
             <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
-              <div className="shrink-0 bg-white/5 py-2 px-4 mb-3 border-2 border-white/10 rounded-lg uppercase"><Copy /></div>
+              <div className="bg-black/10 px-2 rounded-sm text-betacolor">beta</div>
+              <div className="shrink-0 bg-white/5 py-2 px-4 my-3 border-2 border-white/10 rounded-lg uppercase"><Copy /></div>
               <div className="text-white/20 text-center">get item data by URL from clipboard</div>
               <div className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" onClick={getItemData}></div>
             </div>
