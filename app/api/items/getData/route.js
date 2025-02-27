@@ -95,7 +95,7 @@ export const POST = async (req) => {
     json = {
       name: $('.product-page__title').text(),
       img: $('.zoom-image-container>img').attr('src'),
-      price: $('.price-block__wallet-price').text()
+      price: $('.price-block__final-price').text()
     }
   }
   console.log(json)
