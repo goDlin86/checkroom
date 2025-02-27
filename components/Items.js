@@ -27,7 +27,7 @@ export default async function Items({ user }) {
     <>
       <div className="py-2 overflow-x-scroll whitespace-nowrap scrollbar">
         {tags.map(tag => (
-          <a className="mx-2 px-3 py-1 border-2 rounded-full inline-block cursor-pointer transition-colors duration-500 hover:text-white/50" href={`#${tag}`} key={tag}>{tag}</a>
+          <a className="mx-2 px-3 py-1 border-2 border-white/5 bg-white/5 rounded-full inline-block cursor-pointer transition-colors duration-500 hover:border-white/50" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
       </div>      
       <div className="px-4 lg:px-0">

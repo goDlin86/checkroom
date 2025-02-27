@@ -73,7 +73,7 @@ export default function Item({ item }) {
 
   return (
     <div className="flex flex-col items-center">
-      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items"><ChevronLeft /></Link>
+      <Link className="px-4 py-1 border-2 border-white/5 bg-white/5 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:border-white/50" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Edit Item</div>
 
       <form className="w-full max-w-96" onSubmit={del}>
@@ -112,7 +112,7 @@ export default function Item({ item }) {
         <p className="mt-4 text-center">Added {item.createdAt.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Europe/Moscow' })}</p>
         <div className="flex">
           <button 
-            className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:text-white/50" 
+            className="block mx-auto mt-4 px-4 py-2 border-2 border-white/5 bg-white/5 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 disabled:border-white/5 transition-colors duration-500 hover:border-white/50" 
             type="reset" 
             disabled={isUpdating || (selectedTag === item.tag && name === item.name && price === item.price)}
             onClick={update}
@@ -120,7 +120,7 @@ export default function Item({ item }) {
             Update
           </button>
           <button 
-            className="block mx-auto mt-4 px-4 py-2 border-2 border-red-500/70 text-red-500/70 rounded-full text-2xl cursor-pointer font-bold disabled:text-red-500/10 transition-colors duration-500 hover:text-red-500/50"
+            className="block mx-auto mt-4 px-4 py-2 border-2 border-red-500/50 text-red-500/50 rounded-full text-2xl cursor-pointer font-bold disabled:text-red-500/10 disabled:border-red-500/10 transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70"
             disabled={isUpdating}
             type="submit"
           >

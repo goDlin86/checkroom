@@ -84,7 +84,7 @@ export default function AddItem() {
 
   return (
     <div className="flex flex-col items-center">
-      <Link className="px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50" href="/items"><ChevronLeft /></Link>
+      <Link className="px-4 py-1 border-2 border-white/5 bg-white/5 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:border-white/50" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Add Item</div>
 
       <form className="w-full max-w-96"
@@ -118,8 +118,8 @@ export default function AddItem() {
         <div className={selectedImg ? "hidden" : ""}>
           <div className={inputURL === "" ? "" : "hidden"}>
             <div className="relative flex flex-col items-center p-20 w-full bg-white/5 border-4 border-white/10 border-dashed rounded-2xl">
-              <div className="bg-black/10 px-2 rounded-sm text-betacolor">beta</div>
-              <div className="shrink-0 bg-white/5 py-2 px-4 my-3 border-2 border-white/10 rounded-lg uppercase"><Copy /></div>
+              <div className="bg-betacolor/5 px-2 rounded-sm text-betacolor">beta</div>
+              <div className="shrink-0 bg-white/5 py-2 px-4 my-3 border-2 border-white/10 rounded-lg"><Copy /></div>
               <div className="text-white/20 text-center">get item data by URL from clipboard</div>
               <div className="absolute left-0 top-0 w-full h-full opacity-0 cursor-pointer focus:outline-none" onClick={getItemData}></div>
             </div>
@@ -180,7 +180,7 @@ export default function AddItem() {
           </select>
           <div className="flex">
             <button 
-              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:text-white/50" 
+              className="block mx-auto mt-4 px-4 py-2 border-2 border-white/5 bg-white/5 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:border-white/50" 
               type="reset" 
               disabled={isUploading} 
               onClick={reset}
@@ -188,7 +188,7 @@ export default function AddItem() {
               Reset
             </button>
             <button 
-              className="block mx-auto mt-4 px-4 py-2 border-2 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:text-white/50" 
+              className="block mx-auto mt-4 px-4 py-2 border-2 border-white/5 bg-white/5 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:border-white/50" 
               type="submit" 
               disabled={isUploading}
             >
