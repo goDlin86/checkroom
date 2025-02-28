@@ -21,6 +21,7 @@ export default function Item({ item }) {
   const [price, setPrice] = useState(item.price)
   const [selectedTag, setSelectedTag] = useState(item.tag)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   async function update(e) {
     e.preventDefault()
@@ -56,6 +57,7 @@ export default function Item({ item }) {
   async function del(e) {
     e.preventDefault()
 
+    setIsOpen(false)
     setIsUpdating(true)
     const toastId = toast.loading('Loading...')
     const response = await fetch(
@@ -85,7 +87,7 @@ export default function Item({ item }) {
       <Link className="px-4 py-1 border-2 border-white/5 bg-white/5 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:border-white/50" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Edit Item</div>
 
-      <form className="w-full max-w-96" onSubmit={del}>
+      <div className="w-full max-w-96">
         <div className="relative max-w-56 mx-auto overflow-hidden rounded-2xl">
           <img className="block object-cover w-full h-72 text-center" src={item.url} />
         </div>
@@ -122,22 +124,21 @@ export default function Item({ item }) {
         <div className="flex">
           <button 
             className="block mx-auto mt-4 px-4 py-2 border-2 border-white/5 bg-white/5 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 disabled:border-white/5 transition-colors duration-500 hover:border-white/50" 
-            type="reset" 
+            type="button" 
             disabled={isUpdating || (selectedTag === item.tag && name === item.name && price === item.price)}
             onClick={update}
           >
             Update
           </button>
-          <Dialog>
-            <DialogTrigger>
-              <button 
-                className="block mx-auto mt-4 px-4 py-2 border-2 border-red-500/50 text-red-500/50 rounded-full text-2xl cursor-pointer font-bold disabled:text-red-500/10 disabled:border-red-500/10 transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70"
-                disabled={isUpdating}
-                type="reset"
-              >
-                Delete
-              </button>
-            </DialogTrigger>
+          <button 
+            className="block mx-auto mt-4 px-4 py-2 border-2 border-red-500/50 text-red-500/50 rounded-full text-2xl cursor-pointer font-bold disabled:text-red-500/10 disabled:border-red-500/10 transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70"
+            type="button"
+            disabled={isUpdating}
+            onClick={() => setIsOpen(true)}
+          >
+            Delete
+          </button>
+          <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className='w-full max-w-md bg-white p-6 dark:bg-zinc-900'>
               <DialogHeader>
                 <DialogTitle className='text-red-500'>
@@ -149,8 +150,9 @@ export default function Item({ item }) {
               </DialogHeader>
               <div className='mt-6 flex flex-col space-y-4'>
                 <button
-                  className='inline-flex items-center justify-center self-end text-xl font-bold px-4 py-2 border-2 border-red-500/50 text-red-500/70 rounded-full cursor-pointer transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70'
-                  type='submit'
+                  className='inline-flex items-center justify-center self-end text-xl font-bold px-4 py-2 border-2 border-red-500/50 text-red-500/70 rounded-full cursor-pointer transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70 focus:outline-none'
+                  disabled={isUpdating}
+                  onClick={del}
                 >
                   Delete
                 </button>
@@ -158,9 +160,8 @@ export default function Item({ item }) {
               <DialogClose className='text-zinc-600 dark:text-zinc-400' />
             </DialogContent>
           </Dialog>
-          
         </div>
-      </form>
+      </div>
     </div>
   )
 }
