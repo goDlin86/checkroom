@@ -1,12 +1,13 @@
 import { sql } from '@vercel/postgres'
 import Item from '../../../components/Item'
 import { auth } from '../../../lib/auth'
+import { redirect } from 'next/navigation'
 
 export default async function Page({ params }) {
   let session = await auth()
   let user = session?.user
 
-  if (!user) return <p className="py-32 text-center text-xl">Need to sign in</p>
+  if (!user) return redirect('/')
 
   const id = (await params).id
   let data

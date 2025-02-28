@@ -1,6 +1,7 @@
-import Link from "next/link"
-import Items from "../../components/Items"
-import { auth } from "../../lib/auth"
+import Link from 'next/link'
+import Items from '../../components/Items'
+import { auth } from '../../lib/auth'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
@@ -8,7 +9,7 @@ export default async function Home() {
   let session = await auth()
   let user = session?.user
 
-  if (!user) return <p className="py-32 text-center text-xl">Need to sign in</p>
+  if (!user) return redirect('/')
 
   return (
     <main className="pb-6">

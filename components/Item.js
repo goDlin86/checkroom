@@ -6,6 +6,15 @@ import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { tags } from '../lib/tags'
 import { ChevronLeft } from 'lucide-react'
+import {
+  Dialog,
+  DialogDescription,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from '../components/Dialog'
 
 export default function Item({ item }) {
   const [name, setName] = useState(item.name)
@@ -119,13 +128,37 @@ export default function Item({ item }) {
           >
             Update
           </button>
-          <button 
-            className="block mx-auto mt-4 px-4 py-2 border-2 border-red-500/50 text-red-500/50 rounded-full text-2xl cursor-pointer font-bold disabled:text-red-500/10 disabled:border-red-500/10 transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70"
-            disabled={isUpdating}
-            type="submit"
-          >
-            Delete
-          </button>
+          <Dialog>
+            <DialogTrigger>
+              <button 
+                className="block mx-auto mt-4 px-4 py-2 border-2 border-red-500/50 text-red-500/50 rounded-full text-2xl cursor-pointer font-bold disabled:text-red-500/10 disabled:border-red-500/10 transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70"
+                disabled={isUpdating}
+                type="reset"
+              >
+                Delete
+              </button>
+            </DialogTrigger>
+            <DialogContent className='w-full max-w-md bg-white p-6 dark:bg-zinc-900'>
+              <DialogHeader>
+                <DialogTitle className='text-red-500'>
+                  Delete?
+                </DialogTitle>
+                <DialogDescription className='text-zinc-600 dark:text-zinc-400'>
+                  Are you sure you want to delete this item?
+                </DialogDescription>
+              </DialogHeader>
+              <div className='mt-6 flex flex-col space-y-4'>
+                <button
+                  className='inline-flex items-center justify-center self-end text-xl font-bold px-4 py-2 border-2 border-red-500/50 text-red-500/70 rounded-full cursor-pointer transition-colors duration-500 hover:text-red-500/70 hover:border-red-500/70'
+                  type='submit'
+                >
+                  Delete
+                </button>
+              </div>
+              <DialogClose className='text-zinc-600 dark:text-zinc-400' />
+            </DialogContent>
+          </Dialog>
+          
         </div>
       </form>
     </div>
