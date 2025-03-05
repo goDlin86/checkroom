@@ -15,7 +15,6 @@
     "@vercel/postgres": "^0.10.0",
     "cheerio": "^1",
     "clsx": "^2",
-    "crypto-js": "^4.2.0",
     "lucide-react": "^0",
     "motion": "^12",
     "next": "^15",
