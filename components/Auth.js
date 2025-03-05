@@ -6,7 +6,7 @@ export async function Auth() {
   let session = await auth()
   let user = session?.user
 
-  if (!user) return <Link className="ml-2 btn" href="/login"><LogIn /></Link>
+  if (!user) return <Link className="btn" href="/login"><LogIn /></Link>
 
   return (
     <form
@@ -15,7 +15,7 @@ export async function Auth() {
         await signOut()
       }}
     >
-      <button className="ml-2 btn" type="submit"><LogOut /></button>
+      <button className="btn" type="submit"><LogOut /></button>
     </form>
   )
 }
