@@ -84,7 +84,7 @@ export default function AddItem() {
 
   return (
     <div className="flex flex-col items-center">
-      <Link className="px-4 py-1 border-2 border-white/5 bg-white/5 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:border-white/50" href="/items"><ChevronLeft /></Link>
+      <Link className="text-xl btn" href="/items"><ChevronLeft /></Link>
       <div className="text-2xl font-bold py-4">Add Item</div>
 
       <form className="w-full max-w-96"
@@ -180,7 +180,7 @@ export default function AddItem() {
           </select>
           <div className="flex">
             <button 
-              className="block mx-auto mt-4 px-4 py-2 border-2 border-white/5 bg-white/5 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:border-white/50" 
+              className="block mx-auto mt-4 text-2xl font-bold btn" 
               type="reset" 
               disabled={isUploading} 
               onClick={reset}
@@ -188,7 +188,7 @@ export default function AddItem() {
               Reset
             </button>
             <button 
-              className="block mx-auto mt-4 px-4 py-2 border-2 border-white/5 bg-white/5 rounded-full text-2xl cursor-pointer font-bold disabled:text-white/10 transition-colors duration-500 hover:border-white/50" 
+              className="block mx-auto mt-4 text-2xl font-bold btn" 
               type="submit" 
               disabled={isUploading}
             >

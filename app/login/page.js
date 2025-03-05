@@ -8,7 +8,7 @@ const LoginButton = ({ provider }) => {
         await signIn(provider, { redirectTo: '/items' })
       }}
     >
-      <button className="w-full my-2 px-4 py-1 border-2 rounded-full cursor-pointer text-xl transition-colors duration-500 hover:text-white/50">Sign in with {provider}</button>
+      <button className="w-full my-2 text-xl btn">Sign in with {provider}</button>
     </form>
   )
 }
