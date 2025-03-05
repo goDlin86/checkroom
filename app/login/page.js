@@ -1,4 +1,6 @@
+import { redirect } from 'next/navigation'
 import { signIn } from '../../lib/auth'
+import { auth } from '../../lib/auth'
 
 const LoginButton = ({ provider }) => {
   return (
@@ -13,7 +15,12 @@ const LoginButton = ({ provider }) => {
   )
 }
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  let session = await auth()
+  let user = session?.user
+  
+  if (user) return redirect('/items')
+
   return (
     <div className="min-h-screen flex justify-center items-start md:items-center p-8">
       <div className="w-full max-w-sm font-bold">
