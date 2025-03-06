@@ -130,7 +130,7 @@ export default function Item({ item }) {
             Update
           </button>
           <button 
-            className="block mx-auto mt-4 btn border-red-700/50 text-red-700/50 text-2xl font-bold disabled:text-red-500/10 disabled:border-red-500/10 hover:text-red-700/70 hover:border-red-700/70"
+            className="block mx-auto mt-4 btn border-red-700 text-red-700 text-2xl font-bold disabled:text-red-500/10 disabled:border-red-500/10 hover:text-red-500 hover:border-red-500"
             type="button"
             disabled={isUpdating}
             onClick={() => setIsOpen(true)}
@@ -149,7 +149,7 @@ export default function Item({ item }) {
               </DialogHeader>
               <div className='mt-6 flex flex-col space-y-4'>
                 <button
-                  className='inline-flex items-center justify-center self-end text-xl font-bold btn border-red-700/50 text-red-700/70 hover:text-red-700/70 hover:border-red-700/70 focus:outline-none'
+                  className='inline-flex items-center justify-center self-end text-xl font-bold btn border-red-600 text-red-600 hover:text-red-500 hover:border-red-500 focus:outline-none'
                   disabled={isUpdating}
                   onClick={del}
                 >
