@@ -7,6 +7,12 @@
 
 @theme {
   --color-betacolor: #3bdfff;
+  --animate-fadeIn: fadeIn .5s ease-in-out;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 }
 
 @media (prefers-color-scheme: dark) {

@@ -13,12 +13,12 @@ export default function Items({ items }) {
     <>
       <div className="flex my-1 justify-around">
         <Link className="text-xl font-bold text-center btn" href="/items/add">Add item</Link>
-        <div className={"text-xl font-bold text-center btn " + (isLook ? "bg-zinc-700" : "")} onClick={() => setIsLook(!isLook)}>
+        <div className={"text-xl font-bold text-center btn " + (isLook ? "bg-zinc-800" : "")} onClick={() => setIsLook(!isLook)}>
           Create look 
           <div className="inline text-sm bg-betacolor/5 px-2 rounded-sm text-betacolor">beta</div>
         </div>
       </div>
-      <div className="py-4 overflow-x-scroll whitespace-nowrap scrollbar">
+      <div className="py-4 overflow-x-scroll whitespace-nowrap scrollbar text-sm">
         {tags.map(tag => (
           <a className="mx-2 btn" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
