@@ -120,9 +120,9 @@ export default function Item({ item }) {
           ))}
         </select>
         <p className="mt-4 text-center">Added {item.createdAt.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Europe/Moscow' })}</p>
-        <div className="flex">
+        <div className="flex mt-4 justify-around">
           <button 
-            className="block mx-auto mt-4 btn text-2xl font-bold" 
+            className="btn text-2xl font-bold" 
             type="button" 
             disabled={isUpdating || (selectedTag === item.tag && name === item.name && price === item.price)}
             onClick={update}
@@ -130,7 +130,7 @@ export default function Item({ item }) {
             Update
           </button>
           <button 
-            className="block mx-auto mt-4 btn border-red-700 text-red-700 text-2xl font-bold disabled:text-red-500/10 disabled:border-red-500/10 hover:text-red-500 hover:border-red-500"
+            className="btn border-red-700 text-red-700 text-2xl font-bold disabled:text-red-500/10 disabled:border-red-500/10 hover:text-red-500 hover:border-red-500"
             type="button"
             disabled={isUpdating}
             onClick={() => setIsOpen(true)}

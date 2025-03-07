@@ -1,7 +1,8 @@
-import Link from 'next/link'
 import Items from '../../components/Items'
 import { auth } from '../../lib/auth'
 import { redirect } from 'next/navigation'
+import { sql } from '@vercel/postgres'
+import { tags } from '../../lib/tags'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,10 +12,29 @@ export default async function Home() {
 
   if (!user) return redirect('/')
 
+  let data
+
+  try {
+    data = await sql`SELECT * FROM items WHERE owner = ${user.email} ORDER BY "createdAt" DESC;`
+  } catch (e) {
+    console.log(e)
+  }
+
+  const { rows: items } = data
+
+  const itemsByTags = items.reduce((result, item) => {
+    if (result.length === 0) 
+      result = tags.map(tag => ({ tag, items: [] }))
+    
+    const i = result.findIndex(r => r.tag === item.tag)
+    result[i].items.push(item)
+
+    return result
+  }, [])
+
   return (
     <main className="pb-6">
-      <Link className="block mx-auto max-w-40 my-1 text-xl font-bold text-center btn" href="/items/add">Add item</Link>
-      <Items user={user.email} />
+      <Items items={itemsByTags} />
     </main>
   )
 }

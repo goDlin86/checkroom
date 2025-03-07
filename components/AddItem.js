@@ -178,9 +178,9 @@ export default function AddItem() {
               <option key={tag} value={tag}>{tag}</option>
             ))}
           </select>
-          <div className="flex">
+          <div className="flex mt-4 justify-around">
             <button 
-              className="block mx-auto mt-4 text-2xl font-bold btn" 
+              className="text-2xl font-bold btn" 
               type="reset" 
               disabled={isUploading} 
               onClick={reset}
@@ -188,7 +188,7 @@ export default function AddItem() {
               Reset
             </button>
             <button 
-              className="block mx-auto mt-4 text-2xl font-bold btn" 
+              className="text-2xl font-bold btn" 
               type="submit" 
               disabled={isUploading}
             >
