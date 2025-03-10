@@ -7,6 +7,7 @@
 
 @theme {
   --color-betacolor: #3bdfff;
+  
   --animate-fadeIn: fadeIn .5s ease-in-out;
 
   @keyframes fadeIn {

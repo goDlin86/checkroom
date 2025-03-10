@@ -23,13 +23,11 @@ export default function LookItems({ tag, items }) {
         </DisclosureTrigger>
         <DisclosureContent>
           <div className="grid grid-cols-2 mb-4 md:grid-cols-4 gap-4">
-          {
-            items.map((item, i) => (
-              <div className={"relative overflow-hidden rounded-2xl h-72 box-border " + (selected.includes(item.id) ? "border-4" : "" )} key={i} onClick={() => select(item.id)}>
-                <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
-              </div>
-            ))
-          }
+          {items.map((item, i) => (
+            <div className={"relative overflow-hidden rounded-2xl h-72 box-border border-betacolor " + (selected.includes(item.id) ? "border-4" : "" )} key={i} onClick={() => select(item.id)}>
+              <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
+            </div>
+          ))}
           </div>
         </DisclosureContent>
       </Disclosure>
