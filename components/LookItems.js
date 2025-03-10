@@ -16,7 +16,7 @@ export default function LookItems({ tag, items }) {
     <>
       <Disclosure onOpenChange={setIsOpen}>
         <DisclosureTrigger>
-          <h1 id={tag} className="text-xl uppercase my-2 font-bold">
+          <h1 id={tag} className="text-xl uppercase my-2 font-bold cursor-pointer">
             {tag}
             <ChevronDown size={32} className={'inline transition-transform duration-500 ' + (isOpen ? 'rotate-180' : 'rotate-0')} />
           </h1>
@@ -34,7 +34,7 @@ export default function LookItems({ tag, items }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {items.filter(item => selected.includes(item.id)).map((item, i) => (
           <div className="relative overflow-hidden rounded-2xl animate-fadeIn" key={i}>
-            <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
+            <img className="block object-cover w-full h-72" src={item.url} />
           </div>
         ))}
       </div>
