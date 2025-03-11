@@ -20,7 +20,7 @@ export default function Items({ items }) {
       </div>
       <div className="py-4 overflow-x-scroll whitespace-nowrap scrollbar text-sm">
         {tags.map(tag => (
-          <a className="mx-2 btn" href={`#${tag}`} key={tag}>{tag}</a>
+          <a className="mx-2 btn border-1" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
       </div>      
       <div className="px-4 lg:px-0">

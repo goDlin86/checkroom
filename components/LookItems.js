@@ -31,13 +31,15 @@ export default function LookItems({ tag, items }) {
           </div>
         </DisclosureContent>
       </Disclosure>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {items.filter(item => selected.includes(item.id)).map((item, i) => (
-          <div className="relative overflow-hidden rounded-2xl animate-fadeIn" key={i}>
-            <img className="block object-cover w-full h-72" src={item.url} />
-          </div>
-        ))}
-      </div>
+      {!isOpen && 
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fadeIn">
+          {items.filter(item => selected.includes(item.id)).map((item, i) => (
+            <div className="relative overflow-hidden rounded-2xl" key={i}>
+              <img className="block object-cover w-full h-72" src={item.url} />
+            </div>
+          ))}
+        </div>
+      }
     </>
   )
 }
