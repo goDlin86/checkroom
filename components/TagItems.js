@@ -30,13 +30,13 @@ export default function TagItems({ tag, items }) {
           </DisclosureTrigger>
           <DisclosureContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {items.slice(4, items.length).map((item, i) => (
-              <Link href={`/items/${item.id}`} key={i}>
-                <div className="relative overflow-hidden rounded-2xl">
-                  <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
-                </div>
-              </Link>
-            ))}
+              {items.slice(4, items.length).map((item, i) => (
+                <Link href={`/items/${item.id}`} key={i}>
+                  <div className="relative overflow-hidden rounded-2xl">
+                    <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
+                  </div>
+                </Link>
+              ))}
             </div>
           </DisclosureContent>
         </Disclosure>

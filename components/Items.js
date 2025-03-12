@@ -20,14 +20,14 @@ export default function Items({ items }) {
       </div>
       <div className="py-4 overflow-x-scroll whitespace-nowrap scrollbar text-sm">
         {tags.map(tag => (
-          <a className="mx-2 btn border-1" href={`#${tag}`} key={tag}>{tag}</a>
+          <a className="mx-1 btn border-1" href={`#${tag}`} key={tag}>{tag}</a>
         ))}
       </div>      
       <div className="px-4 lg:px-0">
-        {items.map(t => (
-          t.items.length > 0 && 
-          (isLook ? <LookItems tag={t.tag} items={t.items} key={t.tag} /> : <TagItems tag={t.tag} items={t.items} key={t.tag} />)
-        ))}
+        {isLook ? 
+          <LookItems items={items} /> : 
+          items.map(t => (t.items.length > 0 && <TagItems tag={t.tag} items={t.items} key={t.tag} />))
+        }
       </div>
     </>
   )
