@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, X } from 'lucide-react'
 import { Accordion,AccordionItem, AccordionContent, AccordionTrigger } from './Accordion'
 
 export default function LookItems({ items }) {
@@ -39,6 +39,7 @@ export default function LookItems({ items }) {
               {t.items.filter(item => selected.includes(item.id)).map((item, i) => (
                 <div className="relative overflow-hidden rounded-2xl" key={i}>
                   <img className="block object-cover w-full h-72" src={item.url} />
+                  <X className="absolute text-zinc-950 top-1 right-1 cursor-pointer" onClick={() => select(item.id)} />
                 </div>
               ))}
             </div>
