@@ -13,10 +13,10 @@ export default function LookItems({ items }) {
   }
 
   return (
-    <Accordion expandedValue={isOpen} onValueChange={(value) => setIsOpen(value)}>
+    <Accordion expandedValue={isOpen} onValueChange={setIsOpen}>
       {items.map(t => (
         t.items.length > 0 &&
-        <>
+        <div key={t.tag}>
           <AccordionItem value={t.tag}>
             <AccordionTrigger>
               <h1 id={t.tag} className="text-xl uppercase my-2 font-bold cursor-pointer">
@@ -27,7 +27,7 @@ export default function LookItems({ items }) {
             <AccordionContent>
               <div className="grid grid-cols-2 mb-4 md:grid-cols-4 gap-4">
                 {t.items.map((item, i) => (
-                  <div className={"relative overflow-hidden rounded-2xl h-72 box-border border-betacolor " + (selected.includes(item.id) ? "border-4" : "" )} key={i} onClick={() => select(item.id)}>
+                  <div className={"relative overflow-hidden rounded-2xl h-72 box-border border-4  transition-colors duration-500 " + (selected.includes(item.id) ? "border-betacolor" : "border-transparent")} key={i} onClick={() => select(item.id)}>
                     <img className="block object-cover w-full h-72 transition-transform duration-300 scale-100 hover:scale-110" src={item.url} />
                   </div>
                 ))}
@@ -39,12 +39,12 @@ export default function LookItems({ items }) {
               {t.items.filter(item => selected.includes(item.id)).map((item, i) => (
                 <div className="relative overflow-hidden rounded-2xl" key={i}>
                   <img className="block object-cover w-full h-72" src={item.url} />
-                  <X className="absolute text-zinc-950 top-1 right-1 cursor-pointer" onClick={() => select(item.id)} />
+                  <X className="absolute text-zinc-950 top-1 right-1 cursor-pointer transition-colors duration-500 bg-zinc-200/50 rounded-xl hover:bg-zinc-200/80" onClick={() => select(item.id)} />
                 </div>
               ))}
             </div>
           }
-        </>
+        </div>
       ))}
     </Accordion>
   )

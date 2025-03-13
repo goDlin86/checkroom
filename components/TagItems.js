@@ -1,13 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
 import { Disclosure, DisclosureContent, DisclosureTrigger } from './Disclosure'
 import { ChevronDown } from 'lucide-react'
 
 export default function TagItems({ tag, items }) {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
     <>
       <h1 id={tag} className="text-xl uppercase my-2 font-bold">{tag}</h1>
@@ -22,10 +19,10 @@ export default function TagItems({ tag, items }) {
       ))}
       </div>
       {items.length > 4 && 
-        <Disclosure onOpenChange={setIsOpen}>
+        <Disclosure>
           <DisclosureTrigger>
-            <button className="w-full py-2 text-xl cursor-pointer transition-colors duration-500 hover:text-white/50" type="button">
-              <ChevronDown size={32} className={'block mx-auto transition-transform duration-500 ' + (isOpen ? 'rotate-180' : 'rotate-0')} />
+            <button className="w-full py-2 text-xl cursor-pointer transition-all duration-500 hover:text-white/50 aria-expanded:-rotate-180" type="button">
+              <ChevronDown size={32} className={'block mx-auto'} />
             </button>
           </DisclosureTrigger>
           <DisclosureContent>
