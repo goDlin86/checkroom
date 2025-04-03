@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { ChevronDown, X } from 'lucide-react'
-import { Accordion,AccordionItem, AccordionContent, AccordionTrigger } from './Accordion'
+import { Accordion, AccordionItem, AccordionContent, AccordionTrigger } from './Accordion'
 
 export default function LookItems({ items }) {
   const [isOpen, setIsOpen] = useState(null)
