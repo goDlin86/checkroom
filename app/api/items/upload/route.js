@@ -1,14 +1,20 @@
 //import { handleUpload } from '@vercel/blob/client'
-import { NextResponse } from 'next/server'
+import { put } from '@vercel/blob'
  
-export async function POST(request) {
-  //const body = await request.json()
-  const body = request.body
+export async function POST(req) {
+  const { searchParams } = new URL(req.url)
+  const filename = searchParams.get('filename')
+  const secret = searchParams.get('secret')
+
+  if (secret !== process.env.IOS_SECRET) return Response.json({ message: 'Not authenticated' }, { status: 401 })
+
+  //const body = await req.json()
+  const body = req.body
  
   try {
     // const jsonResponse = await handleUpload({
     //   body,
-    //   request,
+    //   req,
     //   onBeforeGenerateToken: async (pathname /*, clientPayload */) => {
     //     // Generate a client token for the browser to upload the file
     //     // ⚠️ Authenticate and authorize users before generating the token.
@@ -37,10 +43,10 @@ export async function POST(request) {
     //   },
     // })
 
-    const blob = await put('222', body, { access: 'public', contentType: 'image/jpeg' })
- 
-    return NextResponse.json({ url: blob.url })
+    const blob = await put(filename, body, { access: 'public', contentType: 'image/jpeg' })
+    return Response.json({ url: blob.url })
   } catch (e) {
-    return NextResponse.json({ error: e.message }, { status: 400 })
+    console.log(e)
+    return Response.json({ error: e.message }, { status: 500 })
   }
 }
