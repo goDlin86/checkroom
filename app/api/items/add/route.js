@@ -21,7 +21,7 @@ export const POST = auth(async (req) => {
   }
 
   try {
-    const blob = await put(filename, body, { access: 'public', contentType: type })
+    const blob = await put(filename, body, { access: 'public', contentType: type, addRandomSuffix: true })
     await sql`INSERT INTO items (name, tag, url, owner, price) VALUES (${filename}, ${tag}, ${blob.url}, ${req.auth.user.email}, ${price});`
     return Response.json({ message: 'Item added!' })
   } catch (e) {

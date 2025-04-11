@@ -43,7 +43,7 @@ export async function POST(req) {
     //   },
     // })
 
-    const blob = await put(filename, body, { access: 'public', contentType: 'image/jpeg' })
+    const blob = await put(filename, body, { access: 'public', contentType: 'image/jpeg', addRandomSuffix: true })
     return Response.json({ url: blob.url })
   } catch (e) {
     console.log(e)
