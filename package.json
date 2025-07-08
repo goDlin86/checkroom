@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@huggingface/inference": "^3",
+    "@huggingface/inference": "^4",
     "@vercel/analytics": "^1.4.1",
     "@vercel/blob": "^1",
     "@vercel/postgres": "^0.10.0",

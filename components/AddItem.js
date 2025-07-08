@@ -52,6 +52,23 @@ export default function AddItem() {
         }
       )
       const data = await response.json()
+
+      // const response = await fetch(
+      //   'https://api.zyte.com/v1/extract',
+      //   {
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       url: text,
+      //       product: true
+      //     }),
+      //     headers: {
+      //       'Authorization': 'Basic ' + btoa('api_key'),
+      //       'Content-Type': 'application/json'
+      //     }
+      //   }
+      // )
+      // const data = await response.json()
+      // console.log(data)
       
       if (response.ok) {
         setSelectedImg(true)

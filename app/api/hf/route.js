@@ -1,4 +1,4 @@
-import { HfInference } from '@huggingface/inference'
+import { InferenceClient } from '@huggingface/inference'
 
 export const maxDuration = 20
 
@@ -7,7 +7,7 @@ export const POST = async (req) => {
   if (blob.type.includes('text/plain'))
     blob = await fetch(await blob.text()).then(r => r.blob())
 
-  const inference = new HfInference(process.env.HF_TOKEN)
+  const inference = new InferenceClient(process.env.HF_TOKEN)
 
   try {
     const image = await inference.imageClassification({
