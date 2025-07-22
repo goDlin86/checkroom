@@ -12,8 +12,8 @@ export const POST = async (req) => {
   try {
     const image = await inference.imageClassification({
       data: blob,
-      model: 'not-lain/cloth_classification',
-      //model: 'microsoft/resnet-50',  
+      //model: 'not-lain/cloth_classification',
+      model: 'microsoft/resnet-50',  
     })
     return Response.json({ message: image[0].label })
   } catch (e) {
