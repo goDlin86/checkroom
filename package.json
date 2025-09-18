@@ -11,7 +11,7 @@
   "dependencies": {
     "@huggingface/inference": "^4",
     "@vercel/analytics": "^1.4.1",
-    "@vercel/blob": "^1",
+    "@vercel/blob": "^2",
     "@vercel/postgres": "^0.10.0",
     "cheerio": "^1",
     "clsx": "^2",

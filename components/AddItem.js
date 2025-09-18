@@ -114,7 +114,7 @@ export default function AddItem() {
           setIsUploading(true)
           const toastId = toast.loading('Loading...')
           const response = await fetch(
-            `/api/items/add?filename=${inputName.current.value}&price=${inputPrice.current.value}&tag=${selectedTag}&type=${file ? file.type : ''}&url=${file ? '' : encodeURIComponent(url)}`,
+            `/api/items/add?filename=${inputName.current.value}&price=${inputPrice.current.value}&tag=${encodeURIComponent(selectedTag)}&type=${file ? file.type : ''}&url=${file ? '' : encodeURIComponent(url)}`,
             {
               method: 'POST',
               body: file,
