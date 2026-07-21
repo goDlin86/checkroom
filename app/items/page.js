@@ -14,8 +14,11 @@ export default async function Home() {
 
   let data
 
+  const queries = tags.map(tag => (`(SELECT * FROM items WHERE owner = '${user.email}' AND tag = '${tag}' ORDER BY "createdAt" DESC LIMIT 4)`))
+  const unionQuery = queries.join(' UNION ALL ')
+
   try {
-    data = await sql`SELECT * FROM items WHERE owner = ${user.email} ORDER BY "createdAt" DESC;`
+    data = await sql.query(unionQuery)//`SELECT * FROM items WHERE owner = ${user.email} ORDER BY "createdAt" DESC;`
   } catch (e) {
     console.log(e)
   }
