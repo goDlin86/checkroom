@@ -8,9 +8,10 @@ import { Spinner } from '../components/Spinner'
 
 export default function TagItems({ tag, items }) {
   const [itemsMore, setItems] = useState([])
+  const [opened, setIsOpened] = useState(false)
 
   const getItems = async (open) => {
-    if (open && itemsMore.length == 0) {
+    if (open && !opened) {
       const response = await fetch(
         '/api/items/getTag',
         {
@@ -23,6 +24,7 @@ export default function TagItems({ tag, items }) {
       )
       const data = await response.json()
       setItems(data)
+      setIsOpened(true)
     } 
   }
 
@@ -46,7 +48,7 @@ export default function TagItems({ tag, items }) {
             </button>
           </DisclosureTrigger>
           <DisclosureContent>
-            {itemsMore.length == 0 ? 
+            {!opened ? 
               <Spinner className={'block mx-auto'} /> :
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {itemsMore.map((item, i) => (
@@ -56,6 +58,7 @@ export default function TagItems({ tag, items }) {
                     </div>
                   </Link>
                 ))}
+                <div className="flex items-center justify-center text-white/50">No more items</div>
               </div>
             }
           </DisclosureContent>
