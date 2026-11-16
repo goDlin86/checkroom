@@ -20,8 +20,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html className="scroll-smooth" lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-mono)]`}>
+    <html className="scroll-smooth" lang="en" data-scroll-behavior="smooth">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-(family-name:--font-geist-mono)`}>
         {children}
         <Toaster toastOptions={{
           style: {
